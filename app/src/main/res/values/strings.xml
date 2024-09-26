@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Vibe Videos</string>
+
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+
+    <string name="internet_connection_problem">Internet connection problem</string>
+    <string name="please_check_your_internet_connection">Please check your Internet connection</string>
+
+    <string name="too_many_requests">Too many requests</string>
+    <string name="please_try_again_later">Please try again later</string>
+
+    <string name="oops">Oops…</string>
+    <string name="something_went_wrong">Something went wrong</string>
+
+    <string name="retry">Retry</string>
+
+    <string name="share_via">Share via</string>
+
+    <string name="no_videos_found_matching_your_request">No videos found matching your request</string>
+
+    <string name="search">search</string>
+    <string name="favorite_button">favorite</string>
+    <string name="share_button">share</string>
+    <string name="play_pause_button">play/pause</string>
+    <string name="video_preview">video %1$s preview</string>
+</resources>
