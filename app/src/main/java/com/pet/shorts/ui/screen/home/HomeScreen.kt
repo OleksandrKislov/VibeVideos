@@ -38,10 +38,10 @@ fun HomeScreen(
     state: State<HomeViewModel.ScreenState>,
     onEvent: (HomeViewModel.UiEvent) -> Unit,
 ) {
-    val videoLazyPagingItems = state.value.videosList?.collectAsLazyPagingItems()
-    val pagerState = rememberPagerState(pageCount = { videoLazyPagingItems?.itemCount ?: 0 })
+    val videoLazyPagingItems = state.value.videosList.collectAsLazyPagingItems()
+    val pagerState = rememberPagerState(pageCount = { videoLazyPagingItems.itemCount })
     LaunchedEffect(videoLazyPagingItems) {
-        if (videoLazyPagingItems?.loadState?.isIdle == false)
+        if (videoLazyPagingItems.loadState.isIdle == false)
             pagerState.scrollToPage(0)
     }
 
@@ -65,7 +65,7 @@ fun HomeScreen(
 
         var isError by remember { mutableStateOf(false) }
         when {
-            videoLazyPagingItems?.loadState?.refresh is LoadState.Loading -> {
+            videoLazyPagingItems.loadState.refresh is LoadState.Loading -> {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
@@ -74,7 +74,7 @@ fun HomeScreen(
                 }
             }
 
-            videoLazyPagingItems?.loadState?.refresh is LoadState.Error -> {
+            videoLazyPagingItems.loadState.refresh is LoadState.Error -> {
                 val error = videoLazyPagingItems.loadState.refresh as LoadState.Error
                 isError = true
                 PagerErrorHandler(
@@ -84,7 +84,7 @@ fun HomeScreen(
                 )
             }
 
-            videoLazyPagingItems?.loadState?.append is LoadState.Error -> {
+            videoLazyPagingItems.loadState.append is LoadState.Error -> {
                 val error = videoLazyPagingItems.loadState.append as LoadState.Error
                 isError = true
                 PagerErrorHandler(
@@ -94,7 +94,7 @@ fun HomeScreen(
                 )
             }
 
-            videoLazyPagingItems?.itemCount == 0 -> {
+            videoLazyPagingItems.itemCount == 0 -> {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
@@ -105,7 +105,7 @@ fun HomeScreen(
 
             !isError -> {
                 VerticalPager(state = pagerState) { page ->
-                    videoLazyPagingItems?.get(page)?.let { video ->
+                    videoLazyPagingItems[page]?.let { video ->
                         val exoPlayer: ExoPlayer =
                             koinInject(parameters = { parametersOf(video.url) })
                         val isCurrentPageActive by remember {
@@ -137,7 +137,7 @@ fun HomeScreen(
                 }
             }
 
-            videoLazyPagingItems?.loadState?.isIdle == true -> {
+            videoLazyPagingItems.loadState.isIdle -> {
                 isError = false
             }
         }

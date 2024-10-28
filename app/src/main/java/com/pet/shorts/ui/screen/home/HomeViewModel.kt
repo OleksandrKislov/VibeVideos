@@ -1,5 +1,6 @@
 package com.pet.shorts.ui.screen.home
 
+import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -12,14 +13,17 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val videoRepo: VideoRepo
 ) : ViewModel() {
+
+    @Stable
     data class ScreenState(
-        val videosList: Flow<PagingData<Video>>? = null,
+        val videosList: Flow<PagingData<Video>> = flow { PagingData.empty<Video>() },
         val searchRequest: String = "",
         val isVideoPlaying: Boolean = true,
         val isFavorite: Map<Int, Boolean> = mapOf()

@@ -31,11 +31,9 @@ class VideoResponsePagingSource(
         } catch (e: Exception) {
             if (e is UnknownHostException) {
                 return LoadResult.Error(NetworkError.NoInternetConnection())
-            }
-            else if (e.cause is NetworkError.HttpTooManyRequests)
+            } else if (e.cause is NetworkError.HttpTooManyRequests) {
                 return LoadResult.Error(NetworkError.HttpTooManyRequests())
-            else
-                return LoadResult.Error(e)
+            } else return LoadResult.Error(e)
         }
 
         return LoadResult.Page(

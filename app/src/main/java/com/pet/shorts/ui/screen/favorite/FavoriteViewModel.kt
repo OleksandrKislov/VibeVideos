@@ -1,5 +1,6 @@
 package com.pet.shorts.ui.screen.favorite
 
+import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -22,6 +23,8 @@ import kotlinx.coroutines.launch
 class FavoriteViewModel(
     private val videoRepo: VideoRepo
 ) : ViewModel() {
+
+    @Stable
     data class ScreenState(
         val videosList: Flow<PagingData<Video>>,
         val videoToShow: Video? = null,
